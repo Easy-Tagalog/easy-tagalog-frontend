@@ -9,6 +9,8 @@ interface SearchProps {
   className?: string;
 }
 
+const ICON_WIDTH = 18;
+
 export default function Search({ className }: SearchProps) {
   return (
     <div className={cn("flex w-full max-w-md items-center", className)}>
@@ -17,8 +19,8 @@ export default function Search({ className }: SearchProps) {
         placeholder="Find a word..."
         className="border-r-0 rounded-r-none focus-visible:ring-0"
       />
-      <Button type="button" className="rounded-l-none" variant="secondary">
-        <SearchIcon />
+      <Button type="button" className="rounded-l-none" variant="destructive">
+        <SearchIcon width={ICON_WIDTH} />
       </Button>
     </div>
   );

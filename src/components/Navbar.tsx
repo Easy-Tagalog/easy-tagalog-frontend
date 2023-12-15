@@ -28,11 +28,11 @@ export default function Navbar() {
             </div>
 
             <div className="ml-auto flex items-center">
-              <div className="hidden md:flex lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+              <div className="hidden md:flex md:flex-1 md:items-center md:justify-end md:space-x-6">
                 {user ? null : (
                   <Link
                     href="sign-in"
-                    className={buttonVariants({ variant: "ghost" })}
+                    className={buttonVariants({ variant: "outline" })}
                   >
                     Sign in
                   </Link>
@@ -47,7 +47,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href="/sign-up"
-                    className={buttonVariants({ variant: "ghost" })}
+                    className={buttonVariants({ variant: "default" })}
                   >
                     Create Account
                   </Link>
