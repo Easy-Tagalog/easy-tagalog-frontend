@@ -1,14 +1,14 @@
 export const NAVBAR_LINKS = [
   {
     label: "Learn",
-    value: "/learn" as const,
+    route: "/learn" as const,
   },
   {
     label: "Translate",
-    value: "/translate" as const,
+    route: "/translate" as const,
   },
   {
     label: "Conjugate",
-    value: "/conjugate" as const,
+    route: "/conjugate" as const,
   },
 ];

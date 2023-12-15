@@ -31,7 +31,7 @@ export default function Home() {
         <div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             The Easiest Way to Learn{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-red-500 to-yellow-400 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text">
               Tagalog
             </span>
             .

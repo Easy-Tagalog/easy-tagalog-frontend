@@ -10,22 +10,23 @@ export default function NavItems() {
   const pathname = usePathname();
 
   return (
-    <div className="flex gap-4 h-full items-center">
-      {NAVBAR_LINKS.map((link, i) => {
-        const isOpen = pathname === link.value;
+    <ul className="flex flex-col gap-4 h-fit w-full items-start lg:h-full lg:flex-row">
+      {NAVBAR_LINKS.map((link) => {
+        const isActive = pathname === link.route;
 
         return (
-          <Link
-            href={link.value}
-            className={buttonVariants({
-              variant: isOpen ? "secondary" : "ghost",
-            })}
-            key={link.label}
-          >
-            {link.label}
-          </Link>
+          <li key={link.label}>
+            <Link
+              href={link.route}
+              className={buttonVariants({
+                variant: isActive ? "secondary" : "ghost",
+              })}
+            >
+              {link.label}
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }
