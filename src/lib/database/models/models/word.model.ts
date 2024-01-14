@@ -1,11 +1,10 @@
 import { Schema, Types, models, model } from "mongoose";
 
-type Accents = number | number[] | null;
-
 interface IConjugation {
+  _id: string;
   tagalog: string;
   english: string;
-  accents: Accents;
+  accents: Types.Array<number>;
   audioUrl?: string;
 }
 
@@ -15,30 +14,30 @@ interface IConjugations {
   future: IConjugation;
 }
 
-interface IWord {
+export interface IWord {
+  _id: string;
   tagalog: string;
-  english: string | string[];
-  root: string;
+  english: Types.Array<string>;
+  accents: Types.Array<number>;
+  root?: string;
   partOfSpeech: string;
-  conjugations: IConjugations;
+  conjugations?: IConjugations;
   audioUrl: string;
-  note: string;
-  accents?: Accents;
-  examples?: string[];
+  note?: string;
 }
 
 const ConjugationSchema = new Schema<IConjugation>({
   tagalog: {
     type: String,
-    required: true,
+    required: [true, "Conjugation must have tagalog translation"],
   },
   english: {
     type: String,
-    required: true,
+    required: [true, "Conjugation must have english translation"],
   },
   accents: {
-    type: Schema.Types.Mixed,
-    required: true,
+    type: [Number],
+    required: [true, "Conjugation must have accent indices"],
   },
   audioUrl: {
     type: String,
@@ -51,12 +50,15 @@ const WordSchema = new Schema<IWord>({
     required: [true, "Word must have tagalog translation"],
   },
   english: {
-    type: Schema.Types.Mixed,
+    type: [String],
     required: [true, "Word must have english translation"],
+  },
+  accents: {
+    type: [Number],
+    default: [],
   },
   root: {
     type: String,
-    required: [true, "Word must have a root"],
   },
   partOfSpeech: {
     type: String,
@@ -73,6 +75,7 @@ const WordSchema = new Schema<IWord>({
       "article",
       "particle",
     ],
+    required: [true, "Word must have a Part Of Speech"],
   },
   conjugations: {
     type: {
@@ -89,22 +92,21 @@ const WordSchema = new Schema<IWord>({
         required: [true, "Conjugation must have a future tense"],
       },
     },
-    required: this.partOfSpeech === "verb",
+    required: function () {
+      return this.partOfSpeech === "verb";
+    },
   },
   audioUrl: {
     type: String,
     unique: true,
     required: [true, "Word must have an audio"],
-    default: () => this.tagalog,
+    default: function () {
+      return this.tagalog;
+    },
   },
   note: String,
-  accents: Schema.Types.Mixed,
-  examples: {
-    type: [Types.ObjectId],
-    ref: "Phrase",
-    default: [],
-  },
 });
 
 const Word = models.Word || model("Word", WordSchema);
+
 export default Word;
