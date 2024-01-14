@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "./ui/button";
+import { Separator } from "./ui/separator";
 
 export default function AuthNav() {
   return (
@@ -9,7 +10,7 @@ export default function AuthNav() {
         Sign in
       </Link>
 
-      <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+      <Separator orientation="vertical" className="py-4" />
 
       <Link href="/sign-up" className={buttonVariants({ variant: "default" })}>
         Create Account
