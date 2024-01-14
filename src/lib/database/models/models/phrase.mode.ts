@@ -10,7 +10,7 @@ export interface IPhrase {
   tagalog: string;
   english: string;
   words: Types.DocumentArray<IPhraseWord>;
-  audioUrl?: string;
+  audioUrl: string;
 }
 
 const PhraseWordSchema = new Schema<IPhraseWord>(
@@ -46,6 +46,15 @@ const PhraseSchema = new Schema<IPhrase>({
   audioUrl: {
     type: String,
     unique: true,
+    default: function () {
+      // This function removes all non-alphanumeric characters, replaces spaces with dashes, and makes the phrase lowercase
+      const result = this.tagalog
+        .replace(/[^\w\s]/g, "")
+        .replace(/\s+/g, "-")
+        .toLowerCase();
+
+      return result;
+    },
   },
 });
 
