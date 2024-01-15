@@ -47,6 +47,7 @@ const WordSchema = new Schema<IWord>({
   isInfinitive: {
     type: Boolean,
     required: function () {
+      // Only required if the word is a verb
       return this.partOfSpeech === "verb";
     },
   },
@@ -54,6 +55,7 @@ const WordSchema = new Schema<IWord>({
     type: Schema.Types.ObjectId,
     ref: "Word",
     required: function () {
+      // Only required if the word is a verb and is a conjugated verb
       return this.partOfSpeech === "verb" && !this.isInfinitive;
     },
   },
