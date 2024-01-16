@@ -21,6 +21,7 @@ interface IQuestion {
 }
 
 export interface ILesson {
+  _id: string;
   title: string;
   questions: Types.DocumentArray<IQuestion>;
 }
