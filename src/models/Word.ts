@@ -26,7 +26,9 @@ const WordSchema = new Schema<IWord>({
     type: [Number],
     default: [],
   },
-  root: String,
+  root: {
+    type: String,
+  },
   partOfSpeech: {
     type: String,
     enum: [
@@ -64,10 +66,12 @@ const WordSchema = new Schema<IWord>({
     unique: true,
     required: [true, "Word must have an audio"],
     default: function () {
-      return this.tagalog;
+      return `${this.tagalog}.mp3`;
     },
   },
-  note: String,
+  note: {
+    type: String,
+  },
 });
 
 const Word = models.Word || model("Word", WordSchema);
