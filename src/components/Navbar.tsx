@@ -1,10 +1,10 @@
-// Use inset-x-0 so it spans all the way from the left to the right
-
 import Link from "next/link";
+
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Logo from "./Logo";
 import NavItems from "./NavItems";
-import { buttonVariants } from "./ui/button";
+import MobileNav from "./MobileNav";
+import AuthNav from "./AuthNav";
 
 export default function Navbar() {
   // Test user
@@ -14,44 +14,22 @@ export default function Navbar() {
     <header className="relative bg-white z-50 top-0 inset-x-0 h-16">
       <MaxWidthWrapper>
         <nav className="border-b border-gray-200">
-          <div className="flex h-16 items-center">
-            {/* TODO: Mobile nav */}
-
+          <div className="flex h-16 items-center justify-between">
             <div className="ml-4 flex lg:ml-0">
-              <Link href="/">
+              <Link href="/" className="transition-all hover:text-red-600">
                 <Logo />
               </Link>
             </div>
 
-            <div className="hidden z-50 lg:ml-8 lg:block lg:self-stretch">
+            <div className="hidden lg:block">
               <NavItems />
             </div>
 
-            <div className="ml-auto flex items-center">
-              <div className="hidden md:flex md:flex-1 md:items-center md:justify-end md:space-x-6">
-                {user ? null : (
-                  <Link
-                    href="sign-in"
-                    className={buttonVariants({ variant: "outline" })}
-                  >
-                    Sign in
-                  </Link>
-                )}
+            <div className="flex gap-4">
+              <MobileNav />
 
-                {user ? null : (
-                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                )}
-
-                {user ? (
-                  <p></p>
-                ) : (
-                  <Link
-                    href="/sign-up"
-                    className={buttonVariants({ variant: "default" })}
-                  >
-                    Create Account
-                  </Link>
-                )}
+              <div className="hidden md:block">
+                {user === null && <AuthNav />}
               </div>
             </div>
           </div>
