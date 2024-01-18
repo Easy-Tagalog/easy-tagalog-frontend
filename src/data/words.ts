@@ -9,7 +9,7 @@ export const lessonOneWords = [
   },
   {
     tagalog: "ikaw",
-    english: ["you", "you (singular)"],
+    english: ["you (singular)"],
     root: "ikaw",
     partOfSpeech: "pronoun",
     accents: [2],
@@ -17,9 +17,11 @@ export const lessonOneWords = [
   },
   {
     tagalog: "ka",
-    english: ["you", "you (singular)"],
+    tagalogWithNG: "kang",
+    english: ["you (singular)"],
     root: "ikaw",
     partOfSpeech: "pronoun",
+    note: "Used in the middle of a phrase, like after a verb",
   },
   {
     tagalog: "siya",
@@ -31,6 +33,7 @@ export const lessonOneWords = [
   },
   {
     tagalog: "pangalan",
+    tagalogWithNG: "pangalang",
     english: ["name"],
     root: "ngalan",
     partOfSpeech: "noun",
@@ -59,11 +62,11 @@ export const lessonOneWords = [
   },
   {
     tagalog: "kumusta",
-    english: ["hello", "how are you", "how is..."],
+    english: ["hello", "how are you", "how is"],
     root: "kumusta",
     partOfSpeech: "interjection",
     accents: [6],
-    note: 'Can also be spelled and pronounced as "kamusta"',
+    note: 'Also spelled and pronounced as "kamusta"',
   },
   {
     tagalog: "salamat",
@@ -118,9 +121,7 @@ export const lessonOneWords = [
   {
     tagalog: "po",
     tagalogWithNG: "pong",
-    english: [
-      "Word to show respect or be polite (No direct english translation)",
-    ],
+    english: ["Word used to be polite or show respect"],
     root: "po",
     partOfSpeech: "adverb",
   },
