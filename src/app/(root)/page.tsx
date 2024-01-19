@@ -45,8 +45,9 @@ export default function Home() {
           </h1>
 
           <p className="mt-6 text-lg max-w-prose text-muted-foreground">
-            Kamusta! Welcome to Tagalog Lang. Learn how to speak Tagalog the way
-            native speakers do.
+            Kamusta! Welcome to Easy Tagalog. Learn how to speak Tagalog the way
+            native speakers do. Easy Tagalog is still a work in progress, but we
+            will provide constant updates!
           </p>
 
           <Search className="mt-2 shadow-sm" />

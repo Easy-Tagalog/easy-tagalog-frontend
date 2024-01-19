@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tagalog Lang",
+  title: "Easy Tagalog",
   description: "Learn Tagalog Easily",
 };
 
