@@ -1,6 +1,7 @@
-export const words = [
+export const lessonOneWords = [
   {
     tagalog: "ako",
+    tagalogWithNG: "akong",
     english: ["I", "Me"],
     root: "ako",
     partOfSpeech: "pronoun",
@@ -16,12 +17,16 @@ export const words = [
   },
   {
     tagalog: "ka",
+    tagalogWithNG: "kang",
     english: ["you (singular)"],
     root: "ikaw",
     partOfSpeech: "pronoun",
+    note: "Used in the middle of a phrase, like after a verb",
   },
   {
     tagalog: "siya",
+    tagalogWithNG: "siyang",
+    tagalogAlternateSpelling: "sya",
     english: ["he", "she"],
     root: "siya",
     partOfSpeech: "pronoun",
@@ -29,8 +34,9 @@ export const words = [
   },
   {
     tagalog: "pangalan",
+    tagalogWithNG: "pangalang",
     english: ["name"],
-    root: "pangalan",
+    root: "ngalan",
     partOfSpeech: "noun",
     accents: [4],
   },
@@ -48,6 +54,78 @@ export const words = [
     partOfSpeech: "preposition",
   },
   {
-    
+    tagalog: "mabuti",
+    tagalogWithNG: "mabuting",
+    english: ["fine", "good", "well", "ok"],
+    root: "buti",
+    partOfSpeech: "adjective",
+    accents: [3],
+  },
+  {
+    tagalog: "kumusta",
+    tagalogAlternateSpelling: "kamusta",
+    english: ["hello", "how are you", "how is"],
+    root: "kumusta",
+    partOfSpeech: "interjection",
+    accents: [6],
+  },
+  {
+    tagalog: "salamat",
+    english: ["thank you"],
+    root: "salamat",
+    partOfSpeech: "interjection",
+    accents: [3],
+  },
+  {
+    tagalog: "maganda",
+    tagalogWithNG: "magandang",
+    english: ["beautiful", "good", "pretty"],
+    root: "ganda",
+    partOfSpeech: "adjective",
+    accents: [6],
+  },
+  {
+    tagalog: "araw",
+    english: ["day", "sun"],
+    root: "araw",
+    partOfSpeech: "noun",
+    accents: [0],
+  },
+  {
+    tagalog: "umaga",
+    english: ["morning"],
+    root: "umaga",
+    partOfSpeech: "noun",
+    accents: [2],
+  },
+  {
+    tagalog: "hapon",
+    english: ["afternoon"],
+    root: "hapon",
+    partOfSpeech: "noun",
+    accents: [1],
+  },
+  {
+    tagalog: "tanghali",
+    english: ["noon", "lunchtime"],
+    root: "tanghali",
+    partOfSpeech: "noun",
+    accents: [5],
+  },
+  {
+    tagalog: "gabi",
+    english: ["night", "evening"],
+    root: "gabi",
+    partOfSpeech: "noun",
+    accents: [3],
+  },
+  {
+    tagalog: "po",
+    tagalogWithNG: "pong",
+    english: ["Word used to be polite or show respect"],
+    root: "po",
+    partOfSpeech: "adverb",
   },
 ];
+
+export const lessonTwoWords = [];
