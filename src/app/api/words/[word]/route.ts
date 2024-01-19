@@ -3,9 +3,9 @@ import Word from "@/models/Word";
 
 // ENDPOINT: .../api/words/[word]
 
-const GET_WORD_BY_PARAM_LIMIT = 5;
+const GET_WORDS_LIMIT = 5;
 
-// Gets all words
+// For the "Translate" page, to get all words based on a search query
 export async function GET(
   req: Request,
   { params }: { params: { word: string } }
@@ -24,7 +24,7 @@ export async function GET(
       ],
     })
       .select("-__v")
-      .limit(GET_WORD_BY_PARAM_LIMIT);
+      .limit(GET_WORDS_LIMIT);
 
     return Response.json({
       word,

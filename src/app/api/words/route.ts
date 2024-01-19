@@ -3,9 +3,16 @@ import Word, { IWord } from "@/models/Word";
 import { lessonOneWords } from "@/data/words";
 
 // ENDPOINT: .../api/words
-// const words = await Word.insertMany(lessonOneWords);
 
-// For now, used for inserting words into the database
+// This request is just to add words from our databfile into the database
+// export async function POST(req: Request) {
+//   await dbConnect();
+//   const words = await Word.insertMany(lessonOneWords);
+
+//   return Response.json({ message: "Words successfully added to the database" });
+// }
+
+// This POST request is to create a word in the database
 export async function POST(req: Request, res: Response) {
   try {
     await dbConnect(); // Database connection
@@ -25,8 +32,8 @@ export async function POST(req: Request, res: Response) {
 
     const newWord = await Word.create({ english, ...word });
 
-    return Response.json({ message: "success", newWord }, { status: 201 });
+    return Response.json({ status: "Success", newWord }, { status: 201 });
   } catch (error) {
-    return Response.json({ message: error }, { status: 400 });
+    return Response.json({ status: "Fail", message: error }, { status: 400 });
   }
 }
