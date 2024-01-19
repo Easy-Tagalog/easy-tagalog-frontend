@@ -4,6 +4,7 @@ export interface IWord {
   _id: string;
   tagalog: string;
   tagalogWithNG?: string;
+  tagalogAlternateSpelling?: string;
   english: Types.Array<string>;
   accents: Types.Array<number>;
   root?: string;
@@ -20,6 +21,9 @@ const WordSchema = new Schema<IWord>({
     required: [true, "Word must have tagalog translation"],
   },
   tagalogWithNG: {
+    type: String,
+  },
+  tagalogAlternateSpelling: {
     type: String,
   },
   english: {

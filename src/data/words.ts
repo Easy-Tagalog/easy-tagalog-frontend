@@ -26,6 +26,7 @@ export const lessonOneWords = [
   {
     tagalog: "siya",
     tagalogWithNG: "siyang",
+    tagalogAlternateSpelling: "sya",
     english: ["he", "she"],
     root: "siya",
     partOfSpeech: "pronoun",
@@ -62,11 +63,11 @@ export const lessonOneWords = [
   },
   {
     tagalog: "kumusta",
+    tagalogAlternateSpelling: "kamusta",
     english: ["hello", "how are you", "how is"],
     root: "kumusta",
     partOfSpeech: "interjection",
     accents: [6],
-    note: 'Also spelled and pronounced as "kamusta"',
   },
   {
     tagalog: "salamat",

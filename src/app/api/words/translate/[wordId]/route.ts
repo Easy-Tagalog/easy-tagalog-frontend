@@ -1,6 +1,8 @@
 import { dbConnect } from "@/lib/dbConnect";
 import Word from "@/models/Word";
 
+// ENDPOINT: .../api/words/translate/[wordId]
+
 // Gets one word by the wordId
 export async function GET(
   req: Request,
@@ -12,7 +14,7 @@ export async function GET(
 
   const body = await req.json();
 
-  const word = Word.findByIdAndUpdate(wordId, body);
+  const word = Word.findById(wordId);
 
   return Response.json({ updatedWord: word }, { status: 200 });
 }
