@@ -2,6 +2,8 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Search from "@/components/Search";
 import { MapPinned, Speech, BookOpen, HomeIcon } from "lucide-react";
 
+import { useRouter } from "next/router";
+
 // max-w-prose is good for <p>
 
 const INFO = [
@@ -32,6 +34,12 @@ const INFO = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleSearchSubmit = () => {
+    router.push("/translate");
+  };
+
   return (
     <>
       <MaxWidthWrapper>
@@ -50,7 +58,10 @@ export default function Home() {
             will provide constant updates!
           </p>
 
-          <Search className="mt-2 shadow-sm" />
+          <Search
+            className="mt-2 shadow-sm"
+            submitFunction={handleSearchSubmit}
+          />
         </div>
       </MaxWidthWrapper>
 
