@@ -11,8 +11,8 @@ export default function Logo() {
           height={150}
           className="overflow-hidden"
         /> */}
+        <span className="leading-none">Easy</span>
         <span className="leading-none">Tagalog</span>
-        <span className="leading-none">Lang</span>
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ export default function Home() {
             will provide constant updates!
           </p>
 
-          <Search className="mt-2 shadow-sm" inHome={true} />
+          <Search className="mt-2 shadow-sm" />
         </div>
       </MaxWidthWrapper>
 

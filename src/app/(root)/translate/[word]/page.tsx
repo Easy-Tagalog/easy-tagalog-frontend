@@ -1,9 +1,19 @@
-export default function TranslateWord({
+async function getWordsBySearchQuery(word: string) {
+  const res = await fetch(`http://localhost:3000/api/words/${word}`, {
+    method: "GET",
+  });
+
+  return res.json();
+}
+
+export default async function TranslateWord({
   params,
 }: {
   params: { word: string };
 }) {
-  const word = params.word;
+  const data = await getWordsBySearchQuery(params.word);
 
-  return <div>{word}</div>;
+  console.log(data);
+
+  return <>hi</>;
 }

@@ -10,12 +10,11 @@ import { useRouter } from "next/navigation";
 
 interface SearchProps {
   className?: string;
-  inHome?: boolean;
 }
 
 const ICON_WIDTH = 22;
 
-export default function Search({ className, inHome = false }: SearchProps) {
+export default function Search({ className }: SearchProps) {
   const [searchText, setSearchText] = useState("");
 
   const router = useRouter();
@@ -26,9 +25,8 @@ export default function Search({ className, inHome = false }: SearchProps) {
     // If there is no text, then no need to search
     if (searchText === "") return;
 
-    // If home, go to translate page
-    if (inHome) router.push(`/translate/${searchText}`);
-    else router.push(`${searchText}`);
+    // Show in translate page
+    router.push(`/translate/${searchText}`);
   };
 
   return (

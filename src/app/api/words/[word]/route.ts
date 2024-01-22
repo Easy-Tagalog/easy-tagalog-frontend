@@ -15,10 +15,11 @@ export async function GET(
 
     const wordToFind = params.word;
 
-    const word = await Word.find({
+    const words = await Word.find({
       $or: [
         { tagalog: wordToFind },
         { tagalogWithNG: wordToFind },
+        { tagalogAlternateSpelling: wordToFind },
         { english: { $in: [wordToFind] } },
         { root: wordToFind },
       ],
@@ -26,10 +27,11 @@ export async function GET(
       .select("-__v")
       .limit(GET_WORDS_LIMIT);
 
-    return Response.json({
-      word,
-    });
+    return Response.json({ words }, { status: 200 });
   } catch (error) {
-    return Response.json({ message: "Failed to find word" }, { status: 500 });
+    return Response.json(
+      { status: "Fail", message: "Failed to find word" },
+      { status: 500 }
+    );
   }
 }
