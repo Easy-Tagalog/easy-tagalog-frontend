@@ -6,15 +6,19 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { SearchIcon } from "lucide-react";
 
+import { useRouter } from "next/navigation";
+
 interface SearchProps {
   className?: string;
-  submitFunction: () => void;
+  inHome?: boolean;
 }
 
 const ICON_WIDTH = 22;
 
-export default function Search({ className, submitFunction }: SearchProps) {
+export default function Search({ className, inHome = false }: SearchProps) {
   const [searchText, setSearchText] = useState("");
+
+  const router = useRouter();
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +26,9 @@ export default function Search({ className, submitFunction }: SearchProps) {
     // If there is no text, then no need to search
     if (searchText === "") return;
 
-    submitFunction();
+    // If home, go to translate page
+    if (inHome) router.push(`/translate/${searchText}`);
+    else router.push(`${searchText}`);
   };
 
   return (
