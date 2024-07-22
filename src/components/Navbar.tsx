@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import MaxWidthWrapper from "./MaxWidthWrapper";
-import Logo from "./Logo";
-import NavItems from "./NavItems";
-import MobileNav from "./MobileNav";
-import AuthNav from "./AuthNav";
+import MaxWidthWrapper from './MaxWidthWrapper';
+import Logo from './Logo';
+import SearchBar from './SearchBar';
+import MobileNav from './MobileNav';
+import AuthNav from './AuthNav';
 
 export default function Navbar() {
   // Test user
@@ -15,20 +15,20 @@ export default function Navbar() {
       <MaxWidthWrapper>
         <nav className="border-b border-gray-200">
           <div className="flex h-16 items-center justify-between">
-            <div className="ml-4 flex lg:ml-0">
+            <div className="flex items-center gap-12">
               <Link href="/" className="transition-all hover:text-red-600">
                 <Logo />
               </Link>
-            </div>
 
-            <div className="hidden lg:block">
-              <NavItems />
+              <div className="hidden lg:block">
+                <SearchBar className="w-80" />
+              </div>
             </div>
 
             <div className="flex gap-4">
               <MobileNav />
 
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 {user === null && <AuthNav />}
               </div>
             </div>
