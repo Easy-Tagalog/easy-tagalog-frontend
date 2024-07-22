@@ -9,7 +9,7 @@ export default function Footer() {
       </Link>
 
       <p className="text-xs sm:text-sm">
-        2023 Tagalog Lang. All rights reserved.
+        2023 Easy Tagalog. All rights reserved.
       </p>
     </footer>
   );
