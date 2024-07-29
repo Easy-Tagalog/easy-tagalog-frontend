@@ -1,33 +1,67 @@
-import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Search from "@/components/Search";
-import { MapPinned, Speech, BookOpen, HomeIcon } from "lucide-react";
+import Link from 'next/link';
+import { Righteous } from 'next/font/google';
+
+import { MapPinned, Speech, BookOpen, HomeIcon } from 'lucide-react';
+import { buttonVariants } from '@/components/ui/button';
+import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import { cn } from '@/lib/utils';
 
 // max-w-prose is good for <p>
 
-const INFO = [
+const righteous = Righteous({ subsets: ['latin'], weight: '400' });
+
+const BULLET_INFO = [
   {
-    name: "Learn Casual Tagalog",
+    name: 'Learn Casual Tagalog',
     Icon: Speech,
     description:
-      "Although Tagalog Lang will teach a bit on how to speak formally, our goal is to have you speak like a normal Tagalog speaker and speak colloquial Tagalog.",
+      'Although Easy Tagalog will teach a bit on how to speak formally, our goal is to have you speak like a normal Tagalog speaker and speak colloquial Tagalog.',
   },
   {
-    name: "Philippines Geography",
+    name: 'Philippines Geography',
     Icon: MapPinned,
     description:
       "Each section and lesson will provide a little insight on different parts and provinces of the Philippines. While learning Tagalog, it's good to know some things about the country.",
   },
   {
-    name: "Philippines Culture",
+    name: 'Philippines Culture',
     Icon: HomeIcon,
     description:
-      "Every Tagalog speaker should be accustomed to some of the Filipino culture. That being traditions, holidays, clothing, and food.",
+      'Every Tagalog speaker should be accustomed to some of the Filipino culture. That being traditions, holidays, clothing, and food.',
   },
   {
-    name: "Philippines History",
+    name: 'Philippines History',
     Icon: BookOpen,
     description:
-      "The Philippines has a rich history aswell, and it might be good to know how Tagalog was influenced by other countries and their languages.",
+      'The Philippines has a rich history aswell, and it might be good to know how Tagalog was influenced by other countries and their languages.',
+  },
+];
+
+const EXPLORE_LESSONS = [
+  {
+    name: 'Greetings',
+    Icon: Speech,
+    tagalog: 'Pagbati',
+  },
+  {
+    name: 'Body',
+    Icon: Speech,
+    tagalog: 'Katawan',
+  },
+  {
+    name: 'Weather',
+    Icon: Speech,
+    tagalog: 'Panahon',
+  },
+  {
+    name: 'Feelings',
+    Icon: Speech,
+    tagalog: 'Damdamin',
+  },
+  {
+    name: 'Food',
+    Icon: Speech,
+    tagalog: 'Pagkain',
   },
 ];
 
@@ -35,50 +69,66 @@ export default function Home() {
   return (
     <>
       <MaxWidthWrapper>
-        <div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            The Easiest Way to Learn{" "}
+        <div className="py-40 mx-auto text-center flex flex-col gap-8 items-center max-w-3xl">
+          <h1
+            className={cn(
+              'text-4xl tracking-tight text-gray-900 sm:text-6xl',
+              righteous.className
+            )}
+          >
+            Simplified{' '}
             <span className="bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text">
               Tagalog
-            </span>
-            .
+            </span>{' '}
+            Learning
           </h1>
 
-          <p className="mt-6 text-lg max-w-prose text-muted-foreground">
-            Kamusta! Welcome to Easy Tagalog. Learn how to speak Tagalog the way
-            native speakers do. Easy Tagalog is still a work in progress, but we
-            will provide constant updates!
+          <p className="text-lg text-muted-foreground">
+            Kamusta! Learn how to speak Tagalog the way native speakers do. This
+            website is still in beta, new content coming soon!
           </p>
 
-          <Search className="mt-2 shadow-sm" />
+          <Link
+            href="/learn"
+            className={buttonVariants({ variant: 'destructive' })}
+          >
+            Start Learning
+          </Link>
         </div>
       </MaxWidthWrapper>
 
-      <section className="border-t border-gray-200 bg-gray-50">
-        <MaxWidthWrapper className="py-20 px-4">
-          <div className="flex flex-col gap-24">
-            {INFO.map((info, i) => {
+      {/* Bulletpoint section */}
+      <section className="bg-gray-100">
+        <MaxWidthWrapper className="py-20 px-4 md:px-0">
+          <div className="flex flex-col gap-10 md:gap-24">
+            {BULLET_INFO.map((info, i) => {
               // This flips the icon and description
               const isOdd = i % 2 !== 0;
 
               return (
                 <div
                   key={info.name}
-                  className={`text-left flex justify-around items-center gap-20 max-w-6xl mx-auto ${
-                    isOdd && "flex-row-reverse"
+                  className={`text-left flex justify-around items-center max-w-6xl mx-auto gap-10 md:gap-20 ${
+                    isOdd && 'flex-row-reverse'
                   }`}
                 >
+                  {/* This is the circle with icon */}
                   <div className="md:flex-shrink-0 flex justify-center">
-                    <div className="h-24 w-24 flex items-center justify-center rounded-full bg-blue-100 text-blue-900">
+                    <div className="h-24 w-24 flex items-center justify-center rounded-full bg-blue-100 text-ph-blue">
                       {<info.Icon className="w-1/2 h-1/2" />}
                     </div>
                   </div>
 
                   <div className="max-w-xl md:ml-4 lg:ml-0">
-                    <h3 className="text-2xl font-medium text-gray-900">
+                    <h3
+                      className={cn(
+                        'text-2xl font-medium',
+                        righteous.className
+                      )}
+                    >
                       {info.name}
                     </h3>
-                    <p className="mt-3 text-sm text-muted-foreground">
+                    <p className="mt-3 text-sm text-muted-foreground md:text-base">
                       {info.description}
                     </p>
                   </div>
@@ -89,9 +139,39 @@ export default function Home() {
         </MaxWidthWrapper>
       </section>
 
+      {/* Explore Lessons section */}
       <section>
-        <MaxWidthWrapper>
-          <h2>Explore Lessons</h2>
+        <MaxWidthWrapper className="py-20">
+          <h3 className={cn('text-2xl text-center', righteous.className)}>
+            Explore Lessons
+          </h3>
+
+          <div className="py-10 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {EXPLORE_LESSONS.map((lessonData, i) => {
+              return (
+                <div
+                  key={i}
+                  className="flex flex-col mx-auto justify-around p-4 w-48 h-60 bg-ph-red text-ph-white rounded-md transition-all hover:cursor-pointer hover:bg-ph-blue hover:text-ph-yellow"
+                >
+                  <lessonData.Icon className="w-1/2 h-1/2 mx-auto" />
+
+                  <div>
+                    <p className="text-lg">{lessonData.name}</p>
+                    <p>{lessonData.tagalog}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="flex justify-center">
+            <Link
+              href="/learn"
+              className={buttonVariants({ variant: 'destructive' })}
+            >
+              Explore More Lessons
+            </Link>
+          </div>
         </MaxWidthWrapper>
       </section>
     </>
