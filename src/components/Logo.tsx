@@ -1,12 +1,17 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-export default function Logo() {
+interface LogoProps {
+  width: number;
+  height: number;
+}
+
+export default function Logo({ width, height }: LogoProps) {
   return (
     <Image
-      src="/logo.png"
+      src="/static/logo.png"
       alt="Easy Tagalog logo"
-      width={150}
-      height={150}
+      width={width}
+      height={height}
       className="overflow-hidden"
     />
   );

@@ -38,9 +38,9 @@ const FOOTER_LINKS = [
 export default function Footer() {
   return (
     <footer className="bg-yellow-100">
-      <MaxWidthWrapper className="flex flex-col justify-around items-center gap-8 px-2 py-10 md:flex-row">
+      <MaxWidthWrapper className="flex flex-col justify-around items-center gap-8 px-2 py-20 md:flex-row">
         <Link href="/">
-          <Logo />
+          <Logo width={200} height={200} />
         </Link>
 
         <div className="flex flex-col gap-20 sm:flex-row">
@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
       </MaxWidthWrapper>
 
-      <p className="text-xs text-center p-1 bg-ph-yellow sm:text-sm">
+      <p className="text-xs text-center p-2 bg-ph-blue text-ph-white sm:text-sm sm:p-1">
         2024 Easy Tagalog. All rights reserved.
       </p>
     </footer>

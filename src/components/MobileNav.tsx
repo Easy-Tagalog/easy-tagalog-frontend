@@ -15,7 +15,7 @@ export default function MobileNav() {
         </SheetTrigger>
 
         <SheetContent className="flex flex-col gap-6 bg-white lg:hidden">
-          <Logo />
+          <Logo width={150} height={150} />
           <Separator className="border border-gray-50" />
 
           <SearchBar />

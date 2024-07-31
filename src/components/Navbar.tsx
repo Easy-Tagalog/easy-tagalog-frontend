@@ -17,7 +17,7 @@ export default function Navbar() {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-12">
               <Link href="/" className="transition-all hover:text-red-600">
-                <Logo />
+                <Logo width={150} height={150} />
               </Link>
 
               <div className="hidden lg:block">

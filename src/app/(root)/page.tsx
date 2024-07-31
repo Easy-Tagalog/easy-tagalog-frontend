@@ -151,7 +151,7 @@ export default function Home() {
               return (
                 <div
                   key={i}
-                  className="flex flex-col mx-auto justify-around p-4 w-48 h-60 bg-ph-red text-ph-white rounded-md transition-all hover:cursor-pointer hover:bg-ph-blue hover:text-ph-yellow"
+                  className="flex flex-col mx-auto justify-around p-4 w-48 h-60 bg-ph-red text-ph-white rounded-md transition-all hover:cursor-pointer hover:bg-ph-blue hover:text-ph-yellow hover:-translate-y-2 hover:shadow-xl"
                 >
                   <lessonData.Icon className="w-1/2 h-1/2 mx-auto" />
 
