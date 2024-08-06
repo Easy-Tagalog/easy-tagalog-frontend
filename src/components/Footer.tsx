@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
       </MaxWidthWrapper>
 
-      <p className="text-xs text-center p-2 bg-ph-blue text-ph-white sm:text-sm sm:p-1">
+      <p className="text-xs text-center p-2 bg-red-800 text-ph-white sm:text-sm sm:p-1">
         2024 Easy Tagalog. All rights reserved.
       </p>
     </footer>

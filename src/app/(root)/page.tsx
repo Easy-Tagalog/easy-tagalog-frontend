@@ -101,13 +101,13 @@ export default function Home() {
       <section className="bg-gray-100">
         <MaxWidthWrapper className="py-20 px-4 md:px-0">
           <div className="flex flex-col gap-10 md:gap-24">
-            {BULLET_INFO.map((info, i) => {
+            {BULLET_INFO.map((info, bulletIndex) => {
               // This flips the icon and description
-              const isOdd = i % 2 !== 0;
+              const isOdd = bulletIndex % 2 !== 0;
 
               return (
                 <div
-                  key={info.name}
+                  key={bulletIndex}
                   className={`text-left flex justify-around items-center max-w-6xl mx-auto gap-10 md:gap-20 ${
                     isOdd && 'flex-row-reverse'
                   }`}
@@ -147,10 +147,10 @@ export default function Home() {
           </h3>
 
           <div className="py-10 gap-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {EXPLORE_LESSONS.map((lessonData, i) => {
+            {EXPLORE_LESSONS.map((lessonData, lessonIndex) => {
               return (
                 <div
-                  key={i}
+                  key={lessonIndex}
                   className="flex flex-col mx-auto justify-around p-4 w-48 h-60 bg-ph-red text-ph-white rounded-md transition-all hover:cursor-pointer hover:bg-ph-blue hover:text-ph-yellow hover:-translate-y-2 hover:shadow-xl"
                 >
                   <lessonData.Icon className="w-1/2 h-1/2 mx-auto" />
