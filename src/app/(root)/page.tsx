@@ -68,7 +68,7 @@ export default function Home() {
       <section className="h-[90vh]">
         <MaxWidthWrapper className="flex flex-col h-full items-center justify-center gap-8 text-center">
           <h1 className="font-fredoka flex flex-col">
-            <span className="text-[5rem] font-fraunces font-bold bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[12rem]">
+            <span className="text-[4.5rem] font-fraunces font-bold bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[12rem]">
               TAGALOG
             </span>
             <span className="text-lg font-semibold text-ph-blue md:text-xl">
@@ -90,7 +90,7 @@ export default function Home() {
       </section>
 
       {/* Bulletpoint section */}
-      <section className="bg-gray-100 py-4 h-screen">
+      <section className="bg-ph-blue py-4 h-screen">
         <MaxWidthWrapper className="h-full flex flex-col justify-around sm:px-4 md:px-0">
           {BULLET_INFO.map((info, i) => {
             // This flips the icon and description
@@ -105,16 +105,16 @@ export default function Home() {
               >
                 {/* This is the circle with icon */}
                 <div className="md:flex-shrink-0 flex justify-center">
-                  <div className="h-24 w-24 flex items-center justify-center rounded-full bg-blue-100 text-ph-blue">
-                    {<info.Icon className="w-1/2 h-1/2" />}
+                  <div className="h-20 w-20 flex items-center justify-center rounded-full bg-blue-100 text-ph-blue">
+                    {<info.Icon className="w-10 h-10 sm:w-1/2 sm:h-1/2" />}
                   </div>
                 </div>
 
                 <div className="max-w-xl p-4 md:ml-4 lg:ml-0">
-                  <h3 className="font-fraunces italic text-lg sm:text-xl">
+                  <h3 className="font-fraunces font-bold italic text-ph-yellow text-lg sm:text-xl">
                     {info.name}
                   </h3>
-                  <p className="mt-3 text-sm text-muted-foreground md:text-base">
+                  <p className="mt-3 text-sm text-ph-white md:text-base">
                     {info.description}
                   </p>
                 </div>
@@ -127,20 +127,22 @@ export default function Home() {
       {/* Explore Lessons section */}
       <section className="h-screen py-4">
         <MaxWidthWrapper className="h-full flex flex-col justify-center items-center">
-          <h3 className="text-2xl text-center">Explore Lessons</h3>
+          <h3 className="font-fraunces font-bold text-ph-red text-2xl text-center">
+            Explore Lessons
+          </h3>
 
-          <div className="py-10 gap-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className="py-10 gap-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
             {EXPLORE_LESSONS.map((lessonData, i) => {
               return (
                 <div
                   key={i}
-                  className="flex flex-col mx-auto justify-around p-4 w-28 h-40 bg-ph-red text-ph-white rounded-md transition-all hover:cursor-pointer hover:bg-ph-blue hover:text-ph-yellow md:w-48 md:h-60"
+                  className="flex flex-col mx-auto justify-around p-4 w-32 h-40 bg-ph-red text-ph-white rounded-md transition-all hover:cursor-pointer hover:bg-ph-blue hover:text-ph-yellow hover:-translate-y-2 hover:shadow-md md:w-48 md:h-60"
                 >
                   <lessonData.Icon className="w-1/2 h-1/2 mx-auto" />
 
                   <div>
-                    <p className="text-lg">{lessonData.name}</p>
-                    <p>{lessonData.tagalog}</p>
+                    <p className="text-base md:text-lg">{lessonData.name}</p>
+                    <p className="text-sm md:text-base">{lessonData.tagalog}</p>
                   </div>
                 </div>
               );
@@ -150,9 +152,9 @@ export default function Home() {
           <div className="flex justify-center">
             <Link
               href="/learn"
-              className={buttonVariants({ variant: "destructive" })}
+              className={buttonVariants({ variant: "outline" })}
             >
-              Explore More Lessons
+              Explore More
             </Link>
           </div>
         </MaxWidthWrapper>
