@@ -1,9 +1,19 @@
 import Link from 'next/link';
 
-import { MapPinned, Speech, BookOpen, HomeIcon } from 'lucide-react';
+import {
+  MapPinned,
+  Speech,
+  BookOpen,
+  HomeIcon,
+  HeartHandshake,
+  PersonStanding,
+  CloudSun,
+  Laugh,
+  Banana,
+} from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import { cn } from '@/lib/utils';
+import LessonCard from '@/components/LessonCard';
 
 // max-w-prose is good for <p>
 
@@ -36,29 +46,29 @@ const BULLET_INFO = [
 
 const EXPLORE_LESSONS = [
   {
-    name: 'Greetings',
-    Icon: Speech,
-    tagalog: 'Pagbati',
+    englishLessonName: 'Greetings',
+    tagalogLessonName: 'Pagbati',
+    Icon: HeartHandshake,
   },
   {
-    name: 'Body',
-    Icon: Speech,
-    tagalog: 'Katawan',
+    englishLessonName: 'Body',
+    tagalogLessonName: 'Katawan',
+    Icon: PersonStanding,
   },
   {
-    name: 'Weather',
-    Icon: Speech,
-    tagalog: 'Panahon',
+    englishLessonName: 'Weather',
+    tagalogLessonName: 'Panahon',
+    Icon: CloudSun,
   },
   {
-    name: 'Feelings',
-    Icon: Speech,
-    tagalog: 'Damdamin',
+    englishLessonName: 'Feelings',
+    tagalogLessonName: 'Damdamin',
+    Icon: Laugh,
   },
   {
-    name: 'Food',
-    Icon: Speech,
-    tagalog: 'Pagkain',
+    englishLessonName: 'Food',
+    tagalogLessonName: 'Pagkain',
+    Icon: Banana,
   },
 ];
 
@@ -127,33 +137,30 @@ export default function Home() {
       {/* Explore Lessons section */}
       <section className="h-screen py-4">
         <MaxWidthWrapper className="h-full flex flex-col justify-center items-center">
-          <h3 className="font-righteous text-ph-red text-2xl text-center">
+          <h3 className="font-righteous text-ph-red text-3xl text-center">
             Explore Lessons
           </h3>
 
           {/* TODO: Create a Lesson Card component for singular lessons */}
           <div className="py-10 gap-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-            {EXPLORE_LESSONS.map((lessonData, i) => {
-              return (
-                <div
-                  key={i}
-                  className="flex flex-col mx-auto justify-around p-4 w-32 h-40 bg-ph-red text-ph-white rounded-md transition-all hover:cursor-pointer hover:bg-ph-blue hover:text-ph-yellow hover:-translate-y-2 hover:shadow-md md:w-48 md:h-60"
-                >
-                  <lessonData.Icon className="w-1/2 h-1/2 mx-auto" />
-
-                  <div>
-                    <p className="text-base md:text-lg">{lessonData.name}</p>
-                    <p className="text-sm md:text-base">{lessonData.tagalog}</p>
-                  </div>
-                </div>
-              );
-            })}
+            {EXPLORE_LESSONS.map(
+              ({ englishLessonName, tagalogLessonName, Icon }, lessonIndex) => {
+                return (
+                  <LessonCard
+                    Icon={Icon}
+                    englishLessonName={englishLessonName}
+                    tagalogLessonName={tagalogLessonName}
+                    key={lessonIndex}
+                  />
+                );
+              }
+            )}
           </div>
 
           <div className="flex justify-center">
             <Link
               href="/learn"
-              className={buttonVariants({ variant: 'outline' })}
+              className={buttonVariants({ variant: 'destructive' })}
             >
               Explore More
             </Link>

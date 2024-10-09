@@ -10,7 +10,7 @@ export default function Learn() {
   return (
     <div>
       <MaxWidthWrapper className="h-[90vh]">
-        <h1 className="uppercase font-righteous text-7xl text-center text-blue-200">
+        <h1 className="uppercase font-righteous text-5xl text-center text-blue-200 py-2 sm:text-7xl">
           Start Learning
         </h1>
 
