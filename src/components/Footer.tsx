@@ -1,10 +1,7 @@
 import Link from 'next/link';
+
 import Logo from './Logo';
 import MaxWidthWrapper from './MaxWidthWrapper';
-
-import { Righteous } from 'next/font/google';
-import { cn } from '@/lib/utils';
-const righteous = Righteous({ subsets: ['latin'], weight: '400' });
 
 const FOOTER_LINKS = [
   {
@@ -31,6 +28,10 @@ const FOOTER_LINKS = [
         text: 'Translate',
         url: '/translate',
       },
+      {
+        text: 'Lessons',
+        url: '/lessons',
+      },
     ],
   },
 ];
@@ -38,20 +39,20 @@ const FOOTER_LINKS = [
 export default function Footer() {
   return (
     <footer className="bg-yellow-100">
-      <MaxWidthWrapper className="flex flex-col justify-around items-center gap-8 px-2 py-10 md:flex-row">
+      <MaxWidthWrapper className="flex flex-col justify-around items-center gap-8 px-2 py-10 md:flex-row md:h-64">
         <Link href="/">
-          <Logo />
+          <Logo width={200} height={200} />
         </Link>
 
         <div className="flex flex-col gap-20 sm:flex-row">
           {FOOTER_LINKS.map(({ header, pages }, i) => (
             <div key={i}>
-              <h3 className={cn('text-xl', righteous.className)}>{header}</h3>
+              <h3 className="text-xl font-righteous">{header}</h3>
               <div className="flex flex-col">
-                {pages.map(({ text, url }, j) => (
+                {pages.map(({ text, url }, footerLinkIndex) => (
                   <Link
                     href={url}
-                    key={j}
+                    key={footerLinkIndex}
                     className="transition-all hover:text-ph-red"
                   >
                     {text}
@@ -63,7 +64,7 @@ export default function Footer() {
         </div>
       </MaxWidthWrapper>
 
-      <p className="text-xs text-center p-1 bg-ph-yellow sm:text-sm">
+      <p className="text-sm text-center p-2 bg-ph-yellow">
         2024 Easy Tagalog. All rights reserved.
       </p>
     </footer>

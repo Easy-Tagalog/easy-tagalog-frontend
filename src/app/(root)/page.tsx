@@ -1,64 +1,64 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { MapPinned, Speech, BookOpen, HomeIcon } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { cn } from "@/lib/utils";
+import { MapPinned, Speech, BookOpen, HomeIcon } from 'lucide-react';
+import { buttonVariants } from '@/components/ui/button';
+import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import { cn } from '@/lib/utils';
 
 // max-w-prose is good for <p>
 
 const BULLET_INFO = [
   {
-    name: "Learn Casual Tagalog",
+    name: 'Learn Casual Tagalog',
     Icon: Speech,
     description:
-      "Although Easy Tagalog will teach a bit on how to speak formally, our goal is to have you speak like a normal Tagalog speaker and speak colloquial Tagalog.",
+      'Although Easy Tagalog will teach a bit on how to speak formally, our goal is to have you speak like a normal Tagalog speaker and speak colloquial Tagalog.',
   },
   {
-    name: "Philippines Geography",
+    name: 'Philippines Geography',
     Icon: MapPinned,
     description:
       "Each section and lesson will provide a little insight on different parts and provinces of the Philippines. While learning Tagalog, it's good to know some things about the country.",
   },
   {
-    name: "Philippines Culture",
+    name: 'Philippines Culture',
     Icon: HomeIcon,
     description:
-      "Every Tagalog speaker should be accustomed to some of the Filipino culture. That being traditions, holidays, clothing, and food.",
+      'Every Tagalog speaker should be accustomed to some of the Filipino culture. That being traditions, holidays, clothing, and food.',
   },
   {
-    name: "Philippines History",
+    name: 'Philippines History',
     Icon: BookOpen,
     description:
-      "The Philippines has a rich history aswell, and it might be good to know how Tagalog was influenced by other countries and their languages.",
+      'The Philippines has a rich history aswell, and it might be good to know how Tagalog was influenced by other countries and their languages.',
   },
 ];
 
 const EXPLORE_LESSONS = [
   {
-    name: "Greetings",
+    name: 'Greetings',
     Icon: Speech,
-    tagalog: "Pagbati",
+    tagalog: 'Pagbati',
   },
   {
-    name: "Body",
+    name: 'Body',
     Icon: Speech,
-    tagalog: "Katawan",
+    tagalog: 'Katawan',
   },
   {
-    name: "Weather",
+    name: 'Weather',
     Icon: Speech,
-    tagalog: "Panahon",
+    tagalog: 'Panahon',
   },
   {
-    name: "Feelings",
+    name: 'Feelings',
     Icon: Speech,
-    tagalog: "Damdamin",
+    tagalog: 'Damdamin',
   },
   {
-    name: "Food",
+    name: 'Food',
     Icon: Speech,
-    tagalog: "Pagkain",
+    tagalog: 'Pagkain',
   },
 ];
 
@@ -68,7 +68,7 @@ export default function Home() {
       <section className="h-[90vh]">
         <MaxWidthWrapper className="flex flex-col h-full items-center justify-center gap-8 text-center">
           <h1 className="font-fredoka flex flex-col">
-            <span className="text-[4.5rem] font-fraunces font-bold bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[12rem]">
+            <span className="text-[4.5rem] font-righteous font-bold bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[14rem]">
               TAGALOG
             </span>
             <span className="text-lg font-semibold text-ph-blue md:text-xl">
@@ -82,7 +82,7 @@ export default function Home() {
 
           <Link
             href="/learn"
-            className={buttonVariants({ variant: "destructive" })}
+            className={buttonVariants({ variant: 'destructive' })}
           >
             Start Learning
           </Link>
@@ -99,8 +99,8 @@ export default function Home() {
             return (
               <div
                 key={info.name}
-                className={`text-left flex justify-around items-center max-w-6xl mx-auto md:gap-4 ${
-                  isOdd && "flex-row-reverse"
+                className={`text-left flex justify-around items-center max-w-6xl mx-auto md:gap-4 lg:justify-between ${
+                  isOdd && 'flex-row-reverse'
                 }`}
               >
                 {/* This is the circle with icon */}
@@ -111,7 +111,7 @@ export default function Home() {
                 </div>
 
                 <div className="max-w-xl p-4 md:ml-4 lg:ml-0">
-                  <h3 className="font-fraunces font-bold italic text-ph-yellow text-lg sm:text-xl">
+                  <h3 className="font-righteous text-ph-yellow text-lg sm:text-xl">
                     {info.name}
                   </h3>
                   <p className="mt-3 text-sm text-ph-white md:text-base">
@@ -127,10 +127,11 @@ export default function Home() {
       {/* Explore Lessons section */}
       <section className="h-screen py-4">
         <MaxWidthWrapper className="h-full flex flex-col justify-center items-center">
-          <h3 className="font-fraunces font-bold text-ph-red text-2xl text-center">
+          <h3 className="font-righteous text-ph-red text-2xl text-center">
             Explore Lessons
           </h3>
 
+          {/* TODO: Create a Lesson Card component for singular lessons */}
           <div className="py-10 gap-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
             {EXPLORE_LESSONS.map((lessonData, i) => {
               return (
@@ -152,7 +153,7 @@ export default function Home() {
           <div className="flex justify-center">
             <Link
               href="/learn"
-              className={buttonVariants({ variant: "outline" })}
+              className={buttonVariants({ variant: 'outline' })}
             >
               Explore More
             </Link>
