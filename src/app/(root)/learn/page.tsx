@@ -13,7 +13,7 @@ const SECTIONS = [
     sectionName: 'Beginner: Foundation',
     href: '/beginner-foundation',
     sectionOverview:
-      'In this section you will learn the alphabet, pronouns, simple greetings, and very commonly used words',
+      'In this section you will learn the alphabet, pronouns, simple greetings, and very commonly used words.',
   },
   {
     sectionName: 'Beginner: Conversation',
@@ -27,11 +27,11 @@ const SECTIONS = [
   },
 ];
 
-export default function Learn() {
+export default function LearnPage() {
   return (
     <div>
       <MaxWidthWrapper className="h-[90vh] flex flex-col items-center">
-        <h1 className="uppercase font-righteous text-center text-5xl text-blue-200 py-8 sm:text-7xl">
+        <h1 className="uppercase font-righteous text-center text-5xl py-8 sm:text-7xl">
           Start Learning
         </h1>
 
