@@ -78,7 +78,7 @@ export default function Home() {
       <section className="h-[90vh]">
         <MaxWidthWrapper className="flex flex-col h-full items-center justify-center gap-8 text-center">
           <h1 className="font-fredoka flex flex-col">
-            <span className="text-[4.5rem] font-righteous font-bold bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[14rem]">
+            <span className="text-[4.5rem] font-righteous font-bold bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[14rem] xl:text-[18rem] 2xl:text-[20rem]">
               TAGALOG
             </span>
             <span className="text-lg font-semibold text-ph-blue md:text-xl">

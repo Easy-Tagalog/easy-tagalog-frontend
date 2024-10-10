@@ -41,7 +41,7 @@ export default function Footer() {
     <footer className="bg-yellow-100">
       <MaxWidthWrapper className="flex flex-col justify-around items-center gap-8 px-2 py-10 md:flex-row md:h-64">
         <Link href="/">
-          <Logo width={200} height={200} />
+          <Logo size={200} />
         </Link>
 
         <div className="flex flex-col gap-20 sm:flex-row">
