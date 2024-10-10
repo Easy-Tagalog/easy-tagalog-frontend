@@ -19,14 +19,16 @@ export default function SectionLessonCard({
   return (
     <div className="relative px-4 py-8 w-full bg-gray-100 shadow-md rounded-md transition-all md:w-[32rem]">
       <BadgeCheck
-        className={`p-2 absolute rounded-full w-12 h-12 bg-green-500 text-green-200 -top-6 shadow-md ${
+        className={`p-2 absolute rounded-full w-12 h-12 bg-green-500 text-ph-white -top-6 shadow-md ${
           sectionLessonCompleted ? 'visible' : 'invisible'
         }`}
       />
 
       <h2 className="mb-4 text-xl font-semibold">{lessonTitle}</h2>
 
-      <p>{sectionLessonCompleted ? 'COMPLETED' : progress + '%'}</p>
+      <p className={sectionLessonCompleted ? 'text-green-500 font-medium' : ''}>
+        {sectionLessonCompleted ? 'COMPLETED' : progress + '%'}
+      </p>
       <Progress value={progress} />
 
       <div className="flex justify-center pt-4">

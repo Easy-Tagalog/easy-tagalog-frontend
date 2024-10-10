@@ -1,46 +1,46 @@
-'use client';
-
-import LessonCard from '@/components/LessonCard';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import SectionLessonCard from '@/components/SectionLessonCard';
+import BackButton from '@/components/BackButton';
 
 const TEST_SECTION_LESSON_DATA = {
   sectionName: 'Beginner: Foundation',
   sectionLessons: [
     {
-      lessonTitle: 'Alphabet',
-      href: '',
+      lessonTitle: 'Alphabet (Abakada)',
+      href: '/lesson/alphabet',
       progress: 100,
     },
     {
       lessonTitle: 'Simple Greetings',
-      href: '',
+      href: '/lesson/simple-greetings',
       progress: 75,
     },
     {
       lessonTitle: 'Personal Pronouns',
-      href: '',
+      href: '/lesson/personal-pronouns',
       progress: 25,
     },
     {
       lessonTitle: 'Simple Phrases',
-      href: '',
+      href: '/lesson/simple-phrases',
       progress: 0,
     },
   ],
 };
 
-interface ISectionProps {
+interface ISectionPageProps {
   params: {
     section: string;
   };
 }
 
-export default function Section({ params }: ISectionProps) {
+export default function SectionPage({ params }: ISectionPageProps) {
   return (
     <div className="mb-12">
       <MaxWidthWrapper>
-        <h2 className="font-righteous text-3xl text-center py-12">
+        <BackButton />
+
+        <h2 className="font-righteous text-3xl text-center pb-12">
           {TEST_SECTION_LESSON_DATA.sectionName}
         </h2>
 
