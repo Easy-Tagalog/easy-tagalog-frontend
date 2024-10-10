@@ -8,6 +8,10 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+    fontFamily: {
+      nunito: ['Nunito', 'sans-serif'],
+      righteous: ['Righteous', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: '2rem',

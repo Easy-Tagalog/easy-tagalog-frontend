@@ -1,10 +1,10 @@
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { MenuIcon } from 'lucide-react';
-import { Separator } from './ui/separator';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { MenuIcon } from "lucide-react";
+import { Separator } from "./ui/separator";
 
-import Logo from './Logo';
-import AuthNav from './AuthNav';
-import SearchBar from './SearchBar';
+import Logo from "./Logo";
+import AuthNav from "./AuthNav";
+import SearchBar from "./TranslateSearchBar";
 
 export default function MobileNav() {
   return (
