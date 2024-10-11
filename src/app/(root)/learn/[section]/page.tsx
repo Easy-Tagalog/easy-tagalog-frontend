@@ -1,6 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import SectionLessonCard from '@/components/SectionLessonCard';
-import BackButton from '@/components/BackButton';
+import BackQuitButton from '@/components/BackQuitButton';
 
 const TEST_SECTION_LESSON_DATA = {
   sectionName: 'Beginner: Foundation',
@@ -38,7 +38,7 @@ export default function SectionPage({ params }: ISectionPageProps) {
   return (
     <div className="mb-12">
       <MaxWidthWrapper>
-        <BackButton />
+        <BackQuitButton className="my-4" />
 
         <h2 className="font-righteous text-3xl text-center pb-12">
           {TEST_SECTION_LESSON_DATA.sectionName}

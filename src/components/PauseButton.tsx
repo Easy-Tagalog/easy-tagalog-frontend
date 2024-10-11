@@ -9,7 +9,8 @@ import {
 import { Switch } from '@/components/ui/switch';
 
 import { Pause } from 'lucide-react';
-import BackButton from './BackButton';
+import BackButton from './BackQuitButton';
+import RestartButton from './RestartButton';
 
 export default function PauseButton() {
   return (
@@ -29,7 +30,10 @@ export default function PauseButton() {
               <p>Enable Audio</p>
             </div>
 
-            <BackButton type="quit" />
+            <div className="flex items-center w-full gap-8">
+              <BackButton type="quit" />
+              <RestartButton />
+            </div>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
