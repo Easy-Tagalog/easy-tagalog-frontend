@@ -4,101 +4,63 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import LessonHeader from '@/components/LessonHeader';
+import { shuffleArray } from '@/lib/utils';
 
-const FILIPINO_ALPHABET = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
-  'M',
-  'N',
-  'Ñ',
-  'NG',
-  'O',
-  'P',
-  'Q',
-  'R',
-  'S',
-  'T',
-  'U',
-  'V',
-  'W',
-  'X',
-  'Y',
-  'Z',
-];
-
-const ABAKADA_ALPHABET = [
-  'A',
-  'B',
-  'K',
-  'D',
-  'E',
-  'G',
-  'H',
-  'I',
-  'L',
-  'M',
-  'N',
-  'NG',
-  'O',
-  'P',
-  'R',
-  'S',
-  'T',
-  'U',
-  'W',
-  'Y',
-];
-
-const LESSON_CONTENT = [
-  {
-    alphabet: FILIPINO_ALPHABET,
-    content:
-      'The Filipino alphabet contains all letters from the english alphabet with the addition of 2 letters.',
-  },
-  {
-    alphabet: ABAKADA_ALPHABET,
-    content:
-      'The modern tagalog alphabet (also known as the abakada) follows a different order with some missing english letters.',
-  },
-  {
-    alphabet: [FILIPINO_ALPHABET[14], FILIPINO_ALPHABET[15]],
-    content:
-      'Since Tagalog uses some spanish words, you will see the letter "Ñ" comes from the spanish alphabet and "NG" is a unique Filipino/Tagalog letter.',
-  },
-];
-
-const LESSON_QUESTIONS = [
-  {
-    question: 'Which letter came from spain?',
-    options: ['Ñ', 'X', 'G', 'R'],
-  },
-  {
-    question: 'Which two letters are not in the english alphabet?',
-    options: ['Ñ', 'NG', 'A', 'L'],
-  },
-];
+import { LESSON_CONTENT, LESSON_QUESTIONS } from './constants';
 
 const DEFAULT_QUESTION_INDEX = 0;
 
 export default function AlphabetPage() {
   const [questionIndex, setQuestionIndex] = useState(DEFAULT_QUESTION_INDEX);
+  const [isAnswering, setIsAnswering] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
+  const [answer, setAnswer] = useState<string | string[]>();
 
   const onNextButtonClicked = () => {
     setQuestionIndex((prev) => prev + 1);
+
+    if (
+      questionIndex + 1 >= LESSON_CONTENT.length &&
+      questionIndex < LESSON_CONTENT.length + LESSON_QUESTIONS.length
+    ) {
+      shuffleArray(LESSON_QUESTIONS[0].options);
+      setAnswer(LESSON_QUESTIONS[0].answer);
+      setIsAnswering(true);
+    }
+  };
+
+  const handleOptionClicked = (optionIndex: number, questionType: string) => {
+    if (questionType === 'singleAnswer') {
+      setSelectedOptions([optionIndex]);
+      return;
+    }
+
+    if (questionType === 'multipleAnswers') {
+      switch (selectedOptions.length) {
+        case 0:
+          setSelectedOptions([optionIndex]);
+          break;
+
+        case 1:
+          setSelectedOptions([...selectedOptions, optionIndex]);
+          break;
+
+        case 2:
+          setSelectedOptions([selectedOptions[1], optionIndex]);
+          break;
+      }
+    }
   };
 
   const handleResetLesson = () => {
     setQuestionIndex(DEFAULT_QUESTION_INDEX);
+  };
+
+  {
+    /* TODO: FIX LESSON QUESTION HANDLING ANSWERS */
+  }
+  const handleCheckAnswer = () => {
+    console.log('Hello');
   };
 
   return (
@@ -111,7 +73,7 @@ export default function AlphabetPage() {
         }
       />
 
-      <div className="mt-[20vh] px-4">
+      <div className="h-[60vh] px-4 flex flex-col justify-center items-center relative">
         {/* Displaying lesson content for user to learn first */}
         {questionIndex < LESSON_CONTENT.length &&
           LESSON_CONTENT.map(({ alphabet, content }, lessonContentIndex) => (
@@ -127,7 +89,7 @@ export default function AlphabetPage() {
                 {alphabet.map((letter: string, letterIndex) => (
                   <li
                     key={letterIndex}
-                    className={`text-base p-2 bg-slate-200 rounded-md md:text-4xl ${
+                    className={`text-base p-2 bg-slate-200 rounded-md cursor-default transition-all hover:-translate-y-2 hover:shadow-md md:text-4xl ${
                       letter === 'Ñ' || letter === 'NG'
                         ? 'text-ph-red'
                         : 'text-black'
@@ -140,44 +102,57 @@ export default function AlphabetPage() {
             </div>
           ))}
 
-        {/* TODO: FIX THE LESSON QUESTIONS */}
-        {/* Displaying questions about the lesson content */}
+        {/* Displaying questions AFTER content about the lesson content */}
         {questionIndex >= LESSON_CONTENT.length &&
           questionIndex < LESSON_CONTENT.length + LESSON_QUESTIONS.length &&
-          LESSON_QUESTIONS.map(({ question, options }, lessonQuestionIndex) => (
-            <div
-              className={`${
-                lessonQuestionIndex + LESSON_CONTENT.length - 1 ===
-                questionIndex
-                  ? 'block'
-                  : 'hidden'
-              }`}
-              key={lessonQuestionIndex}
-            >
-              <h3 className="text-lg">{question}</h3>
+          LESSON_QUESTIONS.map(
+            (
+              { question, options, answer, questionType },
+              lessonQuestionIndex
+            ) => (
+              <div
+                className={`${
+                  lessonQuestionIndex + LESSON_CONTENT.length === questionIndex
+                    ? 'block'
+                    : 'hidden'
+                }`}
+                key={lessonQuestionIndex}
+              >
+                <h3 className="text-lg">{question}</h3>
 
-              <ul className="flex gap-4 ">
-                {options.map((letter, optionIndex) => (
-                  <li
-                    className="p-2 text-2xl bg-slate-200 rounded-md"
-                    key={optionIndex}
-                  >
-                    {letter}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                <div className="flex gap-4 justify-center mt-4">
+                  {options.map((letter, optionIndex) => (
+                    <Button
+                      key={optionIndex}
+                      className={`text-black p-4 text-2xl bg-ph-yellow rounded-md hover:bg-ph-blue transition-all hover:text-ph-white hover:-translate-y-1 hover:shadow-md ${
+                        selectedOptions.includes(optionIndex) &&
+                        'bg-ph-blue transition-all text-ph-white -translate-y-1'
+                      }`}
+                      onClick={() =>
+                        handleOptionClicked(optionIndex, questionType)
+                      }
+                    >
+                      {letter}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )
+          )}
 
         {/* Final prompt for when user finishes */}
         {questionIndex === LESSON_CONTENT.length + LESSON_QUESTIONS.length && (
-          <div>FINISHED</div>
+          <div>Nice! You finished this lesson!</div>
         )}
-      </div>
 
-      <Button className="mt-20" onClick={onNextButtonClicked}>
-        Next
-      </Button>
+        <div className="mt-20 absolute bottom-0 text-lg">
+          {isAnswering ? (
+            <Button onClick={handleCheckAnswer}>Check</Button>
+          ) : (
+            <Button onClick={onNextButtonClicked}>Next</Button>
+          )}
+        </div>
+      </div>
     </>
   );
 }
