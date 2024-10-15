@@ -1,109 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import LessonHeader from "@/components/LessonHeader";
 import { shuffleArray } from "@/lib/utils";
 
-import {
-  ILessonContent,
-  ILessonQuestion,
-  LESSON_CONTENT,
-  LESSON_QUESTIONS,
-} from "./constants";
+import { LESSON_CONTENT, LESSON_QUESTIONS } from "./constants";
 
 const DEFAULT_QUESTION_INDEX = 0;
 
-enum ActionType {
-  NOT_READY = "not ready",
-  START = "start",
-  ANSWERING = "answering",
-  CHECK = "check",
-  NEXT = "next",
-  FINISHED = "finished",
-}
-
-interface Action {
-  type: ActionType;
-  payload: ILessonContent | ILessonQuestion;
-}
-
-interface State {
-  content: ILessonContent[];
-  questions: ILessonQuestion[];
-  status: "not ready" | "ready" | "answering" | "finished";
-  stage: "content" | "questions";
-  contentIndex: number;
-  questionIndex: number;
-  selectedOptions: number[];
-}
-
-const INITIAL_STATE: State = {
-  content: [],
-  questions: [],
-
-  // "not ready", "ready", "answering", "finished"
-  status: "not ready",
-  stage: "content",
-  contentIndex: 0,
-  questionIndex: 0,
-  selectedOptions: [],
-};
-
-const reducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case "start":
-      return {
-        ...state,
-      };
-
-    case "answering":
-      break;
-
-    case "check":
-      break;
-
-    case "next":
-      break;
-
-    case "finished":
-      break;
-
-    default:
-      return state;
-  }
-};
-
 export default function AlphabetPage() {
+  const [lessonInfo, setLessonInfo] = useState({
+    content: LESSON_CONTENT,
+    questions: LESSON_QUESTIONS,
+  });
+
+  const [questionIndex, setQuestionIndex] = useState(DEFAULT_QUESTION_INDEX);
   const [isAnswering, setIsAnswering] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
   const [answer, setAnswer] = useState<string | string[]>();
-  const [lessonIndex, setLessonIndex] = useState({
-    content: 0,
-    questions: 0,
-  });
-
-  useEffect(() => {
-    setAnswer(LESSON_QUESTIONS[0].answer);
-  }, []);
 
   const onNextButtonClicked = () => {
-    // Incrementing the content index
-    if (lessonIndex.content < LESSON_CONTENT.length) {
-      setLessonIndex((prev) => ({ ...prev, content: prev.content + 1 }));
-    }
+    setQuestionIndex((prev) => prev + 1);
 
-    if (lessonIndex.content === LESSON_CONTENT.length - 1) {
-      setIsAnswering(true);
-    }
-
-    // Incrementing the questions index
     if (
-      lessonIndex.content === LESSON_CONTENT.length &&
-      lessonIndex.questions < LESSON_QUESTIONS.length
+      questionIndex + 1 >= LESSON_CONTENT.length &&
+      questionIndex < LESSON_CONTENT.length + LESSON_QUESTIONS.length
     ) {
-      setLessonIndex((prev) => ({ ...prev, questions: prev.questions + 1 }));
+      shuffleArray(LESSON_QUESTIONS[0].options);
+      setAnswer(LESSON_QUESTIONS[0].answer);
       setIsAnswering(true);
     }
   };
@@ -131,20 +57,15 @@ export default function AlphabetPage() {
     }
   };
 
-  //   const handleResetLesson = () => {
-  //     setQuestionIndex(DEFAULT_QUESTION_INDEX);
-  //   };
+  const handleResetLesson = () => {
+    setQuestionIndex(DEFAULT_QUESTION_INDEX);
+  };
 
   {
     /* TODO: FIX LESSON QUESTION HANDLING ANSWERS */
   }
   const handleCheckAnswer = () => {
-    setIsAnswering(false);
-
-    if (
-      LESSON_QUESTIONS[lessonIndex.questions].questionType === "singleAnswer"
-    ) {
-    } else console.log("nah");
+    console.log("Hello");
   };
 
   return (
@@ -152,19 +73,19 @@ export default function AlphabetPage() {
       <LessonHeader
         className="my-6 px-2"
         value={
-          ((lessonIndex.content + lessonIndex.questions) * 100) /
+          (questionIndex * 100) /
           (LESSON_CONTENT.length + LESSON_QUESTIONS.length)
         }
       />
 
       <div className="h-[60vh] px-4 flex flex-col justify-center items-center relative">
         {/* Displaying lesson content for user to learn first */}
-        {lessonIndex.content < LESSON_CONTENT.length &&
+        {questionIndex < LESSON_CONTENT.length &&
           LESSON_CONTENT.map(({ alphabet, content }, lessonContentIndex) => (
             <div
               key={lessonContentIndex}
               className={`flex flex-col gap-4 items-center ${
-                lessonContentIndex === lessonIndex.content ? "block" : "hidden"
+                lessonContentIndex === questionIndex ? "block" : "hidden"
               }`}
             >
               <h3 className="text-lg">{content}</h3>
@@ -187,8 +108,8 @@ export default function AlphabetPage() {
           ))}
 
         {/* Displaying questions AFTER content about the lesson content */}
-        {lessonIndex.content === LESSON_CONTENT.length &&
-          lessonIndex.questions < LESSON_QUESTIONS.length &&
+        {questionIndex >= LESSON_CONTENT.length &&
+          questionIndex < LESSON_CONTENT.length + LESSON_QUESTIONS.length &&
           LESSON_QUESTIONS.map(
             (
               { question, options, answer, questionType },
@@ -196,7 +117,7 @@ export default function AlphabetPage() {
             ) => (
               <div
                 className={`${
-                  lessonQuestionIndex === lessonIndex.questions
+                  lessonQuestionIndex + LESSON_CONTENT.length === questionIndex
                     ? "block"
                     : "hidden"
                 }`}
@@ -225,18 +146,15 @@ export default function AlphabetPage() {
           )}
 
         {/* Final prompt for when user finishes */}
-        {lessonIndex.content === LESSON_CONTENT.length &&
-          lessonIndex.questions === LESSON_QUESTIONS.length && (
-            <div>Nice! You finished this lesson!</div>
-          )}
+        {questionIndex === LESSON_CONTENT.length + LESSON_QUESTIONS.length && (
+          <div>Nice! You finished this lesson!</div>
+        )}
 
         <div className="mt-20 absolute bottom-0 text-lg">
           {isAnswering ? (
             <Button onClick={handleCheckAnswer}>Check</Button>
-          ) : lessonIndex.questions < LESSON_QUESTIONS.length ? (
-            <Button onClick={onNextButtonClicked}>Next</Button>
           ) : (
-            <Button onClick={() => {}}>Finish</Button>
+            <Button onClick={onNextButtonClicked}>Next</Button>
           )}
         </div>
       </div>
