@@ -1,39 +1,44 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from 'react';
 
-import { Button } from "@/components/ui/button";
-import LessonHeader from "@/components/LessonHeader";
-import { shuffleArray } from "@/lib/utils";
+import { Button } from '@/components/ui/button';
+import LessonHeader from '@/components/LessonHeader';
+import { shuffleArray } from '@/lib/utils';
 
 import {
   ILessonContent,
   ILessonQuestion,
   LESSON_CONTENT,
   LESSON_QUESTIONS,
-} from "./constants";
+} from './constants';
 
 const DEFAULT_QUESTION_INDEX = 0;
 
 enum ActionType {
-  NOT_READY = "not ready",
-  START = "start",
-  ANSWERING = "answering",
-  CHECK = "check",
-  NEXT = "next",
-  FINISHED = "finished",
+  START = 'start',
+  ANSWERING = 'clicked',
+  CHECK = 'check',
+  CONTENT_NEXT = 'content next',
+  QUESTION_NEXT = 'question next',
+}
+
+enum StageType {
+  NOT_READY = 'not ready',
+  CONTENT = 'content',
+  QUESTIONS = 'questions',
+  FINISHED = 'finished',
 }
 
 interface Action {
   type: ActionType;
-  payload: ILessonContent | ILessonQuestion;
+  payload: number[]; // Chosen options from the user
 }
 
 interface State {
   content: ILessonContent[];
   questions: ILessonQuestion[];
-  status: "not ready" | "ready" | "answering" | "finished";
-  stage: "content" | "questions";
+  stage: StageType;
   contentIndex: number;
   questionIndex: number;
   selectedOptions: number[];
@@ -42,10 +47,7 @@ interface State {
 const INITIAL_STATE: State = {
   content: [],
   questions: [],
-
-  // "not ready", "ready", "answering", "finished"
-  status: "not ready",
-  stage: "content",
+  stage: StageType.NOT_READY,
   contentIndex: 0,
   questionIndex: 0,
   selectedOptions: [],
@@ -53,25 +55,43 @@ const INITIAL_STATE: State = {
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case "start":
+    case 'start':
       return {
         ...state,
+        content: LESSON_CONTENT,
+        questions: LESSON_QUESTIONS,
+        stage: StageType.CONTENT,
       };
 
-    case "answering":
+    case 'clicked':
+      return {
+        ...state,
+        selectedOptions: action.payload,
+      };
+
+    case 'check':
       break;
 
-    case "check":
-      break;
+    case 'content next':
+      return {
+        ...state,
+        contentIndex: state.contentIndex + 1,
+        stage:
+          state.contentIndex === LESSON_CONTENT.length - 1 &&
+          StageType.QUESTIONS,
+      };
 
-    case "next":
-      break;
-
-    case "finished":
-      break;
+    case 'question next':
+      return {
+        ...state,
+        questionIndex: state.questionIndex + 1,
+        stage:
+          state.contentIndex === LESSON_QUESTIONS.length - 1 &&
+          StageType.FINISHED,
+      };
 
     default:
-      return state;
+      throw new Error('Unknown action type');
   }
 };
 
@@ -109,12 +129,12 @@ export default function AlphabetPage() {
   };
 
   const handleOptionClicked = (optionIndex: number, questionType: string) => {
-    if (questionType === "singleAnswer") {
+    if (questionType === 'singleAnswer') {
       setSelectedOptions([optionIndex]);
       return;
     }
 
-    if (questionType === "multipleAnswers") {
+    if (questionType === 'multipleAnswers') {
       switch (selectedOptions.length) {
         case 0:
           setSelectedOptions([optionIndex]);
@@ -142,9 +162,9 @@ export default function AlphabetPage() {
     setIsAnswering(false);
 
     if (
-      LESSON_QUESTIONS[lessonIndex.questions].questionType === "singleAnswer"
+      LESSON_QUESTIONS[lessonIndex.questions].questionType === 'singleAnswer'
     ) {
-    } else console.log("nah");
+    } else console.log('nah');
   };
 
   return (
@@ -164,7 +184,7 @@ export default function AlphabetPage() {
             <div
               key={lessonContentIndex}
               className={`flex flex-col gap-4 items-center ${
-                lessonContentIndex === lessonIndex.content ? "block" : "hidden"
+                lessonContentIndex === lessonIndex.content ? 'block' : 'hidden'
               }`}
             >
               <h3 className="text-lg">{content}</h3>
@@ -174,9 +194,9 @@ export default function AlphabetPage() {
                   <li
                     key={letterIndex}
                     className={`text-base p-2 bg-slate-200 rounded-md cursor-default transition-all hover:-translate-y-2 hover:shadow-md md:text-4xl ${
-                      letter === "Ñ" || letter === "NG"
-                        ? "text-ph-red"
-                        : "text-black"
+                      letter === 'Ñ' || letter === 'NG'
+                        ? 'text-ph-red'
+                        : 'text-black'
                     }`}
                   >
                     {letter}
@@ -197,8 +217,8 @@ export default function AlphabetPage() {
               <div
                 className={`${
                   lessonQuestionIndex === lessonIndex.questions
-                    ? "block"
-                    : "hidden"
+                    ? 'block'
+                    : 'hidden'
                 }`}
                 key={lessonQuestionIndex}
               >
@@ -210,7 +230,7 @@ export default function AlphabetPage() {
                       key={optionIndex}
                       className={`text-black p-4 text-2xl bg-ph-yellow rounded-md hover:bg-ph-blue transition-all hover:text-ph-white hover:-translate-y-1 hover:shadow-md ${
                         selectedOptions.includes(optionIndex) &&
-                        "bg-ph-blue transition-all text-ph-white -translate-y-1"
+                        'bg-ph-blue transition-all text-ph-white -translate-y-1'
                       }`}
                       onClick={() =>
                         handleOptionClicked(optionIndex, questionType)
