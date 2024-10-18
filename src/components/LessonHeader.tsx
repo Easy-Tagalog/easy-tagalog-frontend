@@ -1,19 +1,20 @@
-import PauseButton from './PauseButton';
+import LessonPauseMenu from './LessonPauseMenu';
 import { Progress } from './ui/progress';
-import { cn } from '@/lib/utils';
 
 interface ILessonHeaderProps {
   className?: string;
   value: number;
+  handleRestart: () => void;
 }
 
 export default function LessonHeader({
   className = '',
   value,
+  handleRestart,
 }: ILessonHeaderProps) {
   return (
-    <div className={cn('flex w-full items-center gap-2 sm:gap-4', className)}>
-      <PauseButton />
+    <div className="flex w-full my-6 px-2 items-center gap-2 sm:gap-4">
+      <LessonPauseMenu handleRestart={handleRestart} />
       <Progress value={value} />
     </div>
   );
