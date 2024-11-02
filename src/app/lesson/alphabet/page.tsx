@@ -1,32 +1,33 @@
-'use client';
+"use client";
 
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
-import { Button } from '@/components/ui/button';
-import LessonHeader from '@/components/LessonHeader';
+import { Button } from "@/components/ui/button";
+import LessonHeader from "@/components/LessonHeader";
 
-import { LESSON_CONTENT, LESSON_QUESTIONS, QuestionType } from './constants';
-import ReadyPrompt from '@/components/ReadyPrompt';
-import QuestionOption from '@/components/QuestionOption';
-import LessonAnswer from '@/components/LessonAnswer';
+import { LESSON_CONTENT, LESSON_QUESTIONS, QuestionType } from "./constants";
+import ReadyPrompt from "@/components/ReadyPrompt";
+import QuestionOption from "@/components/QuestionOption";
+import LessonAnswer from "@/components/LessonAnswer";
+import { cn } from "@/lib/utils";
 
 const DEFAULT_START_INDEX = 0;
 
 enum ActionType {
-  START = 'start',
-  CLICKED = 'clicked',
-  CHECK = 'check',
-  CONTENT_NEXT = 'content next',
-  QUESTION_NEXT = 'question next',
-  RESTART = 'restart',
+  START = "start",
+  CLICKED = "clicked",
+  CHECK = "check",
+  CONTENT_NEXT = "content next",
+  QUESTION_NEXT = "question next",
+  RESTART = "restart",
 }
 
 enum StageType {
-  NOT_READY = 'not ready',
-  CONTENT = 'content',
-  ANSWERING = 'answering',
-  CHECKED = 'checked',
-  FINISHED = 'finished',
+  NOT_READY = "not ready",
+  CONTENT = "content",
+  ANSWERING = "answering",
+  CHECKED = "checked",
+  FINISHED = "finished",
 }
 
 type Action =
@@ -143,7 +144,7 @@ const reducer = (state: State, action: Action): State => {
       return INITIAL_STATE;
 
     default:
-      throw new Error('Unknown action type');
+      throw new Error("Unknown action type");
   }
 };
 
@@ -176,7 +177,7 @@ export default function AlphabetPage() {
   };
 
   const finishLesson = () => {
-    console.log('Set lesson finished by user');
+    console.log("Set lesson finished by user");
   };
 
   return (
@@ -200,7 +201,7 @@ export default function AlphabetPage() {
               <div
                 key={lessonContentIndex}
                 className={`flex flex-col gap-4 items-center ${
-                  lessonContentIndex === contentIndex ? 'block' : 'hidden'
+                  lessonContentIndex === contentIndex ? "block" : "hidden"
                 }`}
               >
                 <h3 className="text-lg">{content}</h3>
@@ -209,11 +210,12 @@ export default function AlphabetPage() {
                   {alphabet.map((letter: string, letterIndex) => (
                     <li
                       key={letterIndex}
-                      className={`text-base p-2 bg-slate-200 rounded-md cursor-default transition-all hover:-translate-y-2 hover:shadow-md md:text-4xl ${
-                        letter === 'Ñ' || letter === 'NG'
-                          ? 'text-ph-red'
-                          : 'text-black'
-                      }`}
+                      className={cn(
+                        "text-base p-2 bg-slate-200 rounded-md cursor-default transition-all hover:-translate-y-2 hover:shadow-md md:text-4xl",
+                        letter === "Ñ" || letter === "NG"
+                          ? "text-ph-red"
+                          : "text-black"
+                      )}
                     >
                       {letter}
                     </li>
@@ -240,9 +242,9 @@ export default function AlphabetPage() {
                 lessonQuestionIndex
               ) => (
                 <div
-                  className={`${
-                    lessonQuestionIndex === questionIndex ? 'block' : 'hidden'
-                  }`}
+                  className={cn(
+                    lessonQuestionIndex === questionIndex ? "block" : "hidden"
+                  )}
                   key={lessonQuestionIndex}
                 >
                   <h3 className="text-lg">{question}</h3>
@@ -271,10 +273,10 @@ export default function AlphabetPage() {
             {(stage === StageType.CONTENT || stage === StageType.CHECKED) && (
               <Button
                 onClick={goToNext}
-                className={`${
-                  isUserCorrect && 'bg-green-700 hover:bg-green-600'
-                } ${isUserCorrect === false && 'bg-red-700 hover:bg-red-600'}
-                }`}
+                className={cn(
+                  isUserCorrect && "bg-green-700 hover:bg-green-600",
+                  isUserCorrect === false && "bg-red-700 hover:bg-red-600"
+                )}
               >
                 Next
               </Button>
