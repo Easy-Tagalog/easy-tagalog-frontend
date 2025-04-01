@@ -78,7 +78,7 @@ export default function Home() {
       <section className="h-[90vh]">
         <MaxWidthWrapper className="flex flex-col h-full items-center justify-center gap-8 text-center">
           <h1 className="font-fredoka flex flex-col">
-            <span className="text-[4.5rem] font-righteous font-bold bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[14rem] xl:text-[18rem] 2xl:text-[20rem]">
+            <span className="text-[4.5rem] font-righteous font-bold bg-linear-to-r from-ph-blue via-ph-red to-ph-yellow text-transparent bg-clip-text sm:text-[7rem] md:text-[9rem] lg:text-[14rem] xl:text-[18rem] 2xl:text-[20rem]">
               TAGALOG
             </span>
             <span className="text-lg font-semibold text-ph-blue md:text-xl">
@@ -114,7 +114,7 @@ export default function Home() {
                 }`}
               >
                 {/* This is the circle with icon */}
-                <div className="md:flex-shrink-0 flex justify-center">
+                <div className="md:shrink-0 flex justify-center">
                   <div className="h-20 w-20 flex items-center justify-center rounded-full bg-blue-100 text-ph-blue">
                     {<info.Icon className="w-10 h-10 sm:w-1/2 sm:h-1/2" />}
                   </div>
